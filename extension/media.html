@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add files to your export</title>
+    <link rel="stylesheet" href="media.css">
+  </head>
+  <body>
+    <main id="sp-archive-page" class="archive-shell">
+      <header class="archive-header">
+        <div>
+          <div class="eyebrow">ChatGPT Chat Exporter – Complete Markdown &amp; File Bundle</div>
+          <h1>Add files to your export</h1>
+          <p id="sp-archive-subtitle">Loading the conversation job…</p>
+        </div>
+        <div class="header-actions">
+          <div id="sp-archive-badge" class="badge">Preparing</div>
+          <button id="sp-archive-back" class="back-button" type="button">Back</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>1. Download protected files from ChatGPT</h2>
+        <p>Use ChatGPT’s normal file buttons. This extension does not intercept your session or private requests.</p>
+        <div id="sp-archive-expected" class="file-list"></div>
+      </section>
+
+      <section class="card">
+        <h2>2. Select the downloaded files</h2>
+        <p>Matching uses filename, type, size, and owning turn. Ambiguous matches stay unassigned until you confirm them.</p>
+        <label id="sp-archive-dropzone" class="dropzone" for="sp-archive-files">
+          <input id="sp-archive-files" type="file" multiple>
+          <strong>Choose downloaded files</strong>
+          <span>or drag them here</span>
+        </label>
+        <div id="sp-archive-matches" class="matches"></div>
+      </section>
+
+      <section class="card action-card">
+        <div>
+          <h2>3. Build one organized ZIP</h2>
+          <p id="sp-archive-status" role="status" aria-live="polite">Waiting for the export job.</p>
+        </div>
+        <button id="sp-archive-build" type="button" disabled>Build and download ZIP</button>
+      </section>
+    </main>
+    <script src="src/contracts.js"></script>
+    <script src="src/filename.js"></script>
+    <script src="src/attachments.js"></script>
+    <script src="src/attachment-reconciler.js"></script>
+    <script src="src/markdown.js"></script>
+    <script src="src/zip.js"></script>
+    <script src="media.js"></script>
+  </body>
+</html>

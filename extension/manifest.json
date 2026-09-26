@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Chat Exporter – Complete Markdown & File Bundle",
+  "version": "1.0.0",
+  "author": "aipieksel",
+  "description": "Export complete ChatGPT conversations as Markdown with an optional organized media archive.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*.oaiusercontent.com/*",
+    "https://*.oaistatic.com/*",
+    "https://*.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "ChatGPT Chat Exporter – Complete Markdown & File Bundle",
+    "default_icon": {
+      "16": "icons/icon-light-16.png",
+      "32": "icons/icon-light-32.png",
+      "48": "icons/icon-light-48.png",
+      "128": "icons/icon-light-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": [
+        "src/contracts.js",
+        "src/filename.js",
+        "src/markdown.js",
+        "src/attachments.js",
+        "src/attachment-reconciler.js",
+        "src/zip.js",
+        "src/turn-normalizer.js",
+        "src/chatgpt-adapter.js",
+        "src/content-entry.js",
+        "src/panel-shell.js",
+        "panel.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["media.html"],
+      "matches": ["https://chatgpt.com/*"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}

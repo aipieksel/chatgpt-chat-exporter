@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "variants": [
+    { "name": "standard", "path": "/c/example", "semanticContract": "numbered-turn-sections" },
+    { "name": "project", "path": "/g/project/example/c/example", "semanticContract": "numbered-turn-sections" },
+    { "name": "temporary", "path": "/?temporary-chat=true", "semanticContract": "numbered-turn-sections" },
+    { "name": "custom-gpt", "path": "/g/example/c/example", "semanticContract": "numbered-turn-sections" },
+    { "name": "work-branch", "path": "/c/example?branch=example", "semanticContract": "numbered-turn-sections" },
+    { "name": "public-share", "path": "/share/example", "semanticContract": "numbered-turn-sections" }
+  ],
+  "turnSelectors": [
+    "section[data-turn]",
+    "section[data-testid^='conversation-turn-']"
+  ],
+  "beginning": {
+    "turnTestId": "conversation-turn-1",
+    "sentinelSelector": "[data-turn-id-container='client-created-root']",
+    "stableChecks": 3
+  },
+  "condensedControls": [
+    { "text": "Show more", "ariaExpanded": "false" },
+    { "ariaLabel": "Expand", "ariaExpanded": "false" },
+    { "text": "Show less", "ariaExpanded": "true" }
+  ]
+}
