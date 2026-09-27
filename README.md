@@ -1,11 +1,13 @@
 # ChatGPT Chat Exporter – Complete Markdown & File Bundle
 By aipieksel.
 
-Version: 1.0.0 (unpublished).
+Version: 1.0.0.
 
 ## Overview
 
-ChatGPT Chat Exporter – Complete Markdown & File Bundle is a local-first Chrome extension that exports the currently open ChatGPT conversation as readable Markdown. It can optionally create a ZIP with user-supplied and ChatGPT-produced media in separate folders.
+ChatGPT Chat Exporter helps you keep a readable local copy of the conversation open in your browser. It turns the conversation into Markdown and can bundle available user and ChatGPT media in an organized ZIP. It is useful when you need a record you can read, search, or move into your own files without relying on a screenshot.
+
+Open a conversation on ChatGPT, launch the floating panel, and choose a Markdown export or include media. The extension walks the rendered history, checks whether it can prove the captured beginning and end, and labels gaps instead of presenting an incomplete transcript as complete. Protected files require your explicit download and selection. Processing stays in the browser; there is no remote archive service or account-wide bulk export.
 
 ## Install
 
@@ -17,9 +19,9 @@ ChatGPT Chat Exporter – Complete Markdown & File Bundle is a local-first Chrom
 
 ## Export
 
-The extension first stabilizes the true latest turn, repeatedly loads earlier history until turn 1 and the visible conversation-root sentinel settle at the top, then scans the entire virtualized surface back to the latest turn. It revisits persistent turn slots when late-loaded history shifts positions or messages unmount. A repeatedly observed empty on-screen slot is retained at its actual position and identity as "ChatGPT renders no message content for this turn," without an invented author or timestamp. A nonempty loading placeholder is not treated as an empty turn. Genuine unresolved gaps, duplicate positions and missing boundary proof still prevent completeness.
+The extension loads available earlier turns, then scans back through the rendered conversation. ChatGPT can remove and recreate messages as you scroll, so the exporter checks turn identities and positions as it goes. An empty turn is identified explicitly; a loading placeholder is not treated as an empty message. Gaps, duplicate positions, or an unproven beginning or end produce a partial result.
 
-The page is covered while collecting or downloading. History discovery has no percentage; the top-to-bottom scan then reports nondecreasing progress. History-edge probes leave the virtualizer's overscan area and compare persistent message identities and settled content, not fluctuating heights or recreated expansion buttons. A completed transcript downloads automatically. The retained result uses **Download** for retries, without rescanning. Accessible media downloads automatically when its host permission is already granted; a new permission or protected-file selection still needs a user action. Genuine capture gaps remain visible.
+The page is covered while collection or download is in progress. The panel shows progress during the scan and downloads a finished transcript automatically. If saving fails, **Download** retries the retained result without collecting again. Existing media permission lets accessible files download automatically; a new permission or protected-file selection still needs your action.
 
 Timestamps come from exposed `time[datetime]` elements or date separators immediately before the matching message. Today/Yesterday labels are resolved in the browser's local timezone and exported as UTC. Weekday-only labels remain exactly as displayed because they do not prove a calendar date. A message never inherits another message's timestamp.
 
@@ -54,9 +56,7 @@ All transcript processing is local. There is no telemetry, analytics, remote bac
 
 ## Project layout
 
-`extension/` is the complete browser runtime. `tooling/` contains useful regression tests and packaging scripts. `dist/` holds the single unpublished 1.0.0 package. Workspace `../tooling/` groups shared panel code, synchronization scripts and verification evidence.
-
-Both exporters use `panel.js` for their main UI controller and the same shared panel shell. ChatGPT builds its main panel in JavaScript; Slack embeds `panel.html`. ChatGPT's `media.html`, `media.css` and `media.js` are a separate media-bundle view, not a second main popup. Its `markdown.js`, `contracts.js` and `content-entry.js` separate formatting, validation and startup; Slack groups the corresponding responsibilities in its own platform adapter, core and content modules.
+`extension/` contains the browser runtime and manifest; `tooling/` contains tests and packaging scripts. `dist/` holds generated packages. Capture and formatting code lives under `extension/src/`, while `extension/media.*` handles the media-bundle view. The [documentation index](documentation/0-index.md) routes deeper implementation questions.
 
 ## Development
 
